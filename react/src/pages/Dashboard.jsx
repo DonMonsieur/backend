@@ -11,12 +11,18 @@ import {
     InputLabel,
 } from "@mui/material";
 import api from "../config/api";
+import ViewProductDescription from "./ViewProductDescription";
+import DialogBox from "../components/Dialogbox";
 
 export default function Dashboard() {
     const [products, setProducts] = useState([]);
     const [totalProducts, setTotalProducts] = useState(0);
     const [sortDirection, setSortDirection] = useState("asc");
     const [categoryNames, setCategoryNames] = useState([]);
+    const [openDialogBox, setOpenDialogBox] = useState(false);
+    const [dialogType, setDialogType] = useState();
+    const [productDescription, setProductDescription] = useState("");
+
     const [initialValue, setInitialValue] = useState({
         selectedCategory: "Show all categories",
         pagination: {
@@ -24,6 +30,11 @@ export default function Dashboard() {
             pageSize: 25,
         },
     });
+
+    const handleClose = () => {
+        setOpenDialogBox(false);
+        getProducts();
+    };
 
     const handleCategoryChange = (event) => {
         const selectedCategory = event.target.value;
@@ -111,6 +122,12 @@ export default function Dashboard() {
         getProducts();
     }, [initialValue.pagination, sortDirection, initialValue.selectedCategory]);
 
+    const handleViewDescription = (data, type) => {
+        setProductDescription(data.product_description);
+        setDialogType(type);
+        setOpenDialogBox(true);
+    };
+
     return (
         <Fragment>
             <Box>
@@ -152,7 +169,7 @@ export default function Dashboard() {
                         borderRadius: "10px",
                     }}
                 >
-                    <Grid container spacing={1}>
+                    <Grid container spacing={4}>
                         {products.map((product) => (
                             <Grid
                                 item
@@ -162,12 +179,26 @@ export default function Dashboard() {
                                 key={product.product_id}
                             >
                                 <Paper elevation={3} sx={{ padding: 1 }}>
-                                    <Typography variant="h6">
-                                        {product.product_name}
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        Category: {product.category_name}
-                                    </Typography>
+                                    <Box
+                                        onClick={() =>
+                                            handleViewDescription(
+                                                product,
+                                                "Product Description"
+                                            )
+                                        }
+                                        style={{
+                                            cursor: "pointer",
+                                            padding: "10px",
+                                            textAlign: "center",
+                                        }}
+                                    >
+                                        <Typography variant="h6">
+                                            {product.product_name}
+                                        </Typography>
+                                        <Typography variant="body2">
+                                            Category: {product.category_name}
+                                        </Typography>
+                                    </Box>
                                 </Paper>
                             </Grid>
                         ))}
@@ -187,6 +218,18 @@ export default function Dashboard() {
                     labelRowsPerPage="Products Per Page"
                 />
             </Box>
+
+            {/* --DIALOG BOX--*/}
+            <DialogBox
+                open={openDialogBox}
+                maxWidth="md"
+                onClose={handleClose}
+                title={dialogType}
+            >
+                {dialogType === "Product Description" && (
+                    <ViewProductDescription description={productDescription} />
+                )}
+            </DialogBox>
         </Fragment>
     );
 }

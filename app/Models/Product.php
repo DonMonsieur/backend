@@ -24,7 +24,6 @@ class Product extends Model
             'products.product_category_id',
             'products.product_description',
             'categories.category_name',
-            'categories.category_description',
         ])
             ->leftJoin('categories', 'products.product_category_id', '=', 'categories.id')
             ->orderBy($sortBy, $sortDirection);
