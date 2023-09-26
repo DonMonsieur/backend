@@ -11,23 +11,20 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function getProduct()
     {
-        //
-    }
+        $productList = Product::getProductsData();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return response()->json([
+            'data' => $productList,
+            'message' => 'OK'
+        ], 200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function createProduct(StoreProductRequest $request)
     {
         //
     }
@@ -41,17 +38,9 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function updateProduct(UpdateProductRequest $request, Product $product)
     {
         //
     }
@@ -59,7 +48,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function deleteProduct(Product $product)
     {
         //
     }

@@ -11,15 +11,20 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function getUsers()
     {
-        //
+        $userList = User::all();
+
+        return response()->json([
+            'data' => $userList,
+            'message' => 'OK',
+        ], 200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserRequest $request)
+    public function createUser(StoreUserRequest $request)
     {
         //
     }
@@ -35,7 +40,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function updateUser(UpdateUserRequest $request, User $user)
     {
         //
     }
@@ -43,7 +48,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function deleteUser(User $user)
     {
         //
     }
