@@ -5,49 +5,56 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function getProduct()
+    public function getProduct(Request $request)
     {
-        $productList = Product::getProductsData();
+        $page = $request->query('page');
+        $perPage = $request->query('perPage');
+        $sortBy = $request->query('sortBy', 'product_id');
+        $sortDirection = $request->query('sortDirection', 'asc');
+        $sortCategory = $request->query('sortCategory');
+
+        $productList = Product::getProductsData($perPage, $page, $sortBy, $sortDirection, $sortCategory);
+
+        $meta = [
+            'pagination' => [
+                'total' => $productList->total(),
+                'count' => $productList->count(),
+                'per_page' => $productList->perPage(),
+                'current_page' => $productList->currentPage(),
+                'total_pages' => $productList->lastPage(),
+                'links' => [
+                    'next' => $productList->nextPageUrl(),
+                ],
+            ],
+        ];
 
         return response()->json([
-            'data' => $productList,
-            'message' => 'OK'
+            'status_code' => 200,
+            'message' => 'OK',
+            'data' => $productList->items(),
+            'meta' => $meta,
         ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function createProduct(StoreProductRequest $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Product $product)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function updateProduct(UpdateProductRequest $request, Product $product)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function deleteProduct(Product $product)
     {
         //

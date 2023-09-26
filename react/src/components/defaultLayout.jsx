@@ -56,22 +56,22 @@ const DefaultLayout = () => {
             <Box
                 sx={{
                     width: {
-                        xs: "97%",
-                        sm: "98%",
+                        xs: "88%",
+                        sm: "91%",
                         md: "91%",
                         lg: "92%",
                         xl: "92%",
                     },
                     margin: {
-                        xs: "1vh",
-                        sm: "1vh",
+                        xs: "7vh",
+                        sm: "8vh",
                         md: "10vh",
                         lg: "11vh",
                         xl: "12vh",
                     },
                     paddingTop: {
-                        xs: "8vh",
-                        sm: "9vh",
+                        xs: "1vh",
+                        sm: "0vh",
                         md: "0vh",
                         lg: "0vh",
                         xl: "0vh",

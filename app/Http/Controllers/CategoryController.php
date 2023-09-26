@@ -16,9 +16,10 @@ class CategoryController extends Controller
         $categoryList = Category::all();
 
         return response()->json([
+            'status_code' => 200,
             'message' => 'OK',
             'data' => $categoryList
-        ]);
+        ], 200);
     }
 
     /**

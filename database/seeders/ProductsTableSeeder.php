@@ -13,11 +13,11 @@ class ProductsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 100; $i++) {
             Product::create([
                 'product_name' => 'Product ' . $i,
                 'product_sku' => 'SKU' . $i,
-                'product_category_id' => rand(1, 10),
+                'product_category_id' => rand(1, 20),
                 'product_description' => 'Description for Product ' . $i,
             ]);
         }

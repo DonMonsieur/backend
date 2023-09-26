@@ -13,7 +13,7 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 20; $i++) {
             Category::create([
                 'category_name' => 'Category ' . $i,
                 'category_description' => 'Description for Category ' . $i,
