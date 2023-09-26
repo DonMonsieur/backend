@@ -18,11 +18,14 @@ class Product extends Model
     public static function getProductsData()
     {
         return self::select([
-            'id as product_id',
-            'product_name',
-            'product_sku',
-            'product_category_id',
-            'product_description',
-        ])->get();
+            'products.id as product_id',
+            'products.product_name',
+            'products.product_sku',
+            'products.product_category_id',
+            'products.product_description',
+            'categories.category_name',
+        ])
+            ->leftJoin('categories', 'products.product_category_id', '=', 'categories.id')
+            ->get();
     }
 }
