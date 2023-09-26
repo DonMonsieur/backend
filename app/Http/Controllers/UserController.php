@@ -8,12 +8,11 @@ use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function getUsers()
     {
-        $userList = User::all();
+        $userList = User::orderBy('first_name', 'ASC')
+            ->orderBy('last_name', 'ASC')
+            ->get();;
 
         return response()->json([
             'data' => $userList,
@@ -21,35 +20,50 @@ class UserController extends Controller
         ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function createUser(StoreUserRequest $request)
     {
-        //
+        try {
+            $userData = $request->validated();
+            $userData['password'] = bcrypt($userData['password']);
+
+            $user = User::create($userData);
+
+            return response()->json([
+                'message' => 'User created successfully',
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while creating the user.'], 500);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
+    public function updateUser(UpdateUserRequest $request, $id)
     {
-        //
+        try {
+            $user = User::findOrFail($id);
+            $userData = $request->validated();
+
+            $user->update($userData);
+
+            return response()->json([
+                'message' => 'User updated successfully',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while updating the user.'], 500);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function updateUser(UpdateUserRequest $request, User $user)
+    public function deleteUser($id)
     {
-        //
-    }
+        try {
+            $user = User::findOrFail($id);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function deleteUser(User $user)
-    {
-        //
+            $user->delete($user);
+
+            return response()->json([
+                'message' => 'User deleted!',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'An error occurred while updating the user.'], 500);
+        }
     }
 }

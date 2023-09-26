@@ -24,8 +24,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('/users')->group(function () {
     Route::get('/list', [UserController::class, 'getUsers']);
     Route::post('/create', [UserController::class, 'createUser']);
-    Route::put('/update', [UserController::class, 'updateUser']);
-    Route::delete('/delete', [UserController::class, 'deleteUser']);
+    Route::put('/update/{id}', [UserController::class, 'updateUser']);
+    Route::delete('/delete/{id}', [UserController::class, 'deleteUser']);
 });
 
 Route::prefix('/products')->group(function () {
