@@ -16,6 +16,8 @@ import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import { Dashboard, ChevronLeft } from "@mui/icons-material";
 import GroupIcon from "@mui/icons-material/Group";
+import CategoryIcon from "@mui/icons-material/Category";
+import InventoryIcon from "@mui/icons-material/Inventory";
 
 const drawerWidth = 230;
 
@@ -132,6 +134,10 @@ const NavigationBar = () => {
                             ? "Dashboard"
                             : currentUrl == "/users"
                             ? "Users"
+                            : currentUrl == "/categories"
+                            ? "Categories"
+                            : currentUrl == "/products"
+                            ? "Products"
                             : ""}
                     </Typography>
                 </Toolbar>
@@ -175,6 +181,34 @@ const NavigationBar = () => {
                                 <GroupIcon />
                             </ListItemIcon>
                             <ListItemText primary="Users" />
+                        </ListItem>
+
+                        <ListItem
+                            button
+                            id="categories"
+                            component={Link}
+                            to="/categories"
+                            onClick={handleLinkClick}
+                            disabled={isButtonDisabled}
+                        >
+                            <ListItemIcon>
+                                <CategoryIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Categories" />
+                        </ListItem>
+
+                        <ListItem
+                            button
+                            id="products"
+                            component={Link}
+                            to="/products"
+                            onClick={handleLinkClick}
+                            disabled={isButtonDisabled}
+                        >
+                            <ListItemIcon>
+                                <InventoryIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Products" />
                         </ListItem>
                     </List>
                 </Box>

@@ -16,6 +16,7 @@ class CategoriesTableSeeder extends Seeder
         for ($i = 1; $i <= 20; $i++) {
             Category::create([
                 'category_name' => 'Category ' . $i,
+                'product_manager' => rand(1, 20),
                 'category_description' => 'Description for Category ' . $i,
             ]);
         }

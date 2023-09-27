@@ -7,7 +7,7 @@ import {
     TextField,
 } from "@mui/material";
 import React, { Fragment } from "react";
-import api from "../config/api";
+import api from "../../config/api";
 import { useState } from "react";
 
 const CreateUsers = ({ onClose }) => {
@@ -17,11 +17,6 @@ const CreateUsers = ({ onClose }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
-
-    const handleImageChange = (e) => {
-        const selectedImage = e.target.files[0];
-        setImage(selectedImage);
-    };
 
     const createUser = async () => {
         try {

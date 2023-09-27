@@ -8,7 +8,7 @@ import {
     TextField,
 } from "@mui/material";
 import React, { Fragment, useState, useEffect } from "react";
-import api from "../config/api";
+import api from "../../config/api";
 
 const UpdateUsers = ({ selectedUser, onClose, snackBarData }) => {
     const [userId, setUserId] = useState();
@@ -43,7 +43,6 @@ const UpdateUsers = ({ selectedUser, onClose, snackBarData }) => {
                 password_confirmation: passwordConfirmation,
             });
 
-            console.log(response.data);
             if (response.status === 200) {
                 onClose();
                 alert(response.data.message);

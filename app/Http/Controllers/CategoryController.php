@@ -8,49 +8,49 @@ use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function getCategories()
     {
-        $categoryList = Category::all();
+        $categoryList = Category::getCategoriesWithUsernames();
 
         return response()->json([
             'status_code' => 200,
             'message' => 'OK',
             'data' => $categoryList
-        ], 200);
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function createCategories(StoreCategoryRequest $request)
     {
-        //
+        $validatedCategory = $request->validated();
+
+        $category = Category::create($validatedCategory);
+
+        return response()->json([
+            'message' => 'Category created successfully',
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
+    public function updateCategories(UpdateCategoryRequest $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category->update($request->validated());
+
+        return response()->json([
+            'message' => 'Category updated successfully',
+        ], 201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function updateCategories(UpdateCategoryRequest $request, Category $category)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function deleteCategories(Category $category)
+    public function deleteCategories($id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category->delete();
+
+        return response()->json([
+            'message' => 'Category deleted!'
+        ]);
     }
 }

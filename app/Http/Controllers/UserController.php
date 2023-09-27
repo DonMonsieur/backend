@@ -66,4 +66,15 @@ class UserController extends Controller
             return response()->json(['error' => 'An error occurred while updating the user.'], 500);
         }
     }
+
+    public function getProductManager()
+    {
+        $data = User::getManager();
+
+        return response()->json([
+            'status_code' => 200,
+            'message' => 'OK',
+            'data' => $data,
+        ], 200);
+    }
 }

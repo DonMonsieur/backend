@@ -26,18 +26,19 @@ Route::prefix('/users')->group(function () {
     Route::post('/create', [UserController::class, 'createUser']);
     Route::put('/update/{id}', [UserController::class, 'updateUser']);
     Route::delete('/delete/{id}', [UserController::class, 'deleteUser']);
+    Route::get('/product-manager', [UserController::class, 'getProductManager']);
 });
 
 Route::prefix('/products')->group(function () {
     Route::get('/list', [ProductController::class, 'getProduct']);
     Route::post('/create', [ProductController::class, 'createProduct']);
-    Route::put('/update', [ProductController::class, 'updateProduct']);
+    Route::put('/update/{id}', [ProductController::class, 'updateProduct']);
     Route::delete('/delete', [ProductController::class, 'deleteProduct']);
 });
 
 Route::prefix('/categories')->group(function () {
     Route::get('/list', [CategoryController::class, 'getCategories']);
     Route::post('/create', [CategoryController::class, 'createCategories']);
-    Route::put('/update', [CategoryController::class, 'updateCategories']);
-    Route::delete('/delete', [CategoryController::class, 'deleteCategories']);
+    Route::put('/update/{id}', [CategoryController::class, 'updateCategories']);
+    Route::delete('/delete/{id}', [CategoryController::class, 'deleteCategories']);
 });

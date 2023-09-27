@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('category_name')->unique();
             $table->text('category_description')->nullable();
+            $table->foreignId('product_manager')->constrained('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

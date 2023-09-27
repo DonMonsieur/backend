@@ -7,7 +7,7 @@ import {
     TextField,
 } from "@mui/material";
 import React, { Fragment, useEffect } from "react";
-import api from "../config/api";
+import api from "../../config/api";
 import { useState } from "react";
 
 const ViewUser = (selectedUser) => {

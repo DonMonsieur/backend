@@ -19,6 +19,9 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $primaryKey = 'id';
+
+
     protected $fillable = [
         'username',
         'first_name',
@@ -46,4 +49,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public static function getManager()
+    {
+        return self::select('id', 'username')->get();
+    }
 }

@@ -7,17 +7,16 @@ import {
     TextField,
 } from "@mui/material";
 import React, { Fragment, useEffect, useState } from "react";
-import api from "../config/api";
+import api from "../../config/api";
 
-const DeleteUser = ({ selectedUser, onClose, snackBarData }) => {
-    const userId = selectedUser.id;
-    const username = selectedUser.username;
-    const firstName = selectedUser.first_name;
-    const lastName = selectedUser.last_name;
-    const email = selectedUser.email;
+const DeleteCategory = ({ selectedCategory, onClose, snackBarData }) => {
+    const categoryId = selectedCategory.id;
+    const categoryName = selectedCategory.category_name;
+    const categoryDescription = selectedCategory.category_description;
+    const productManager = selectedCategory.product_manager;
 
     const deleteUser = async () => {
-        const response = await api.delete(`/users/delete/${userId}`);
+        const response = await api.delete(`/categories/delete/${categoryId}`);
         if (response.status === 200) {
             onClose();
             alert(response.data.message);
@@ -30,54 +29,39 @@ const DeleteUser = ({ selectedUser, onClose, snackBarData }) => {
                 <Grid container direction={"column"} spacing={3} paddingTop={2}>
                     <Grid item>
                         <TextField
-                            id="username"
-                            name="username"
-                            label="Username"
+                            id="category_name"
+                            name="category_name"
+                            label="Category Name"
                             variant="outlined"
                             size="small"
                             fullWidth
-                            value={username}
+                            value={categoryName}
                             InputProps={{ readOnly: true }}
                         />
                     </Grid>
                     <Grid item>
                         <TextField
-                            id="first_name"
-                            name="first_name"
-                            label="First Name"
+                            id="category_description"
+                            name="category_description"
+                            label="Category Description"
                             variant="outlined"
                             size="small"
                             fullWidth
-                            value={firstName}
+                            value={categoryDescription}
                             InputProps={{ readOnly: true }}
                         />
                     </Grid>
                     <Grid item>
                         <TextField
-                            id="last_name"
-                            name="last_name"
-                            label="Last Name"
+                            id="product_manager"
+                            name="product_manager"
+                            label="Product Manager"
                             variant="outlined"
                             size="small"
                             fullWidth
-                            value={lastName}
+                            value={productManager}
                             InputProps={{ readOnly: true }}
                         />
-                    </Grid>
-                    <Grid item>
-                        <Grid item>
-                            <TextField
-                                id="email"
-                                name="email"
-                                label="Email"
-                                variant="outlined"
-                                size="small"
-                                fullWidth
-                                value={email}
-                                InputProps={{ readOnly: true }}
-                            />
-                        </Grid>
-                        <Grid item></Grid>
                     </Grid>
                 </Grid>
             </DialogContent>
@@ -97,4 +81,4 @@ const DeleteUser = ({ selectedUser, onClose, snackBarData }) => {
     );
 };
 
-export default DeleteUser;
+export default DeleteCategory;

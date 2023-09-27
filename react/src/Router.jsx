@@ -1,9 +1,11 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Users from "./pages/Users";
+import Users from "./pages/Users/Users";
 import NotFound from "./pages/NotFound";
 import DefaultLayout from "./components/DefaultLayout";
 import Dashboard from "./pages/Dashboard";
+import Categories from "./pages/Categories/Categories";
+import Products from "./pages/Products";
 
 const router = createBrowserRouter([
     {
@@ -11,12 +13,20 @@ const router = createBrowserRouter([
         element: <DefaultLayout />,
         children: [
             {
+                path: "/dashboard",
+                element: <Dashboard />,
+            },
+            {
                 path: "/users",
                 element: <Users />,
             },
             {
-                path: "/dashboard",
-                element: <Dashboard />,
+                path: "/categories",
+                element: <Categories />,
+            },
+            {
+                path: "/products",
+                element: <Products />,
             },
         ],
     },

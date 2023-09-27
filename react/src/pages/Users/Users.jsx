@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { useState } from "react";
-import api from "../config/api";
+import api from "../../config/api";
 import { Box, Button, IconButton, Tooltip } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import {
@@ -13,7 +13,7 @@ import CreateUser from "./CreateUser";
 import ViewUser from "./ViewUser";
 import UpdateUser from "./UpdateUser";
 import DeleteUser from "./DeleteUser";
-import DialogBox from "../components/Dialogbox";
+import DialogBox from "../../components/Dialogbox";
 
 const Users = () => {
     const [users, setUsers] = useState([]);
@@ -27,6 +27,7 @@ const Users = () => {
 
     const getUsers = async () => {
         const response = await api.get("/users/list");
+
         if (response.status == 200) {
             setUsers(response.data.data);
         }
