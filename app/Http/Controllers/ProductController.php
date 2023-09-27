@@ -67,6 +67,7 @@ class ProductController extends Controller
         $product = Product::create($validatedProduct);
 
         return response()->json([
+            'status_code' => 201,
             'message' => 'Product created successfully',
             'product' => $product,
         ], 201);
@@ -80,8 +81,10 @@ class ProductController extends Controller
             $validatedProduct = $request->validated();
 
             if ($request->hasFile('product_image')) {
-                if (file_exists(public_path($product->product_image))) {
-                    unlink(public_path($product->product_image));
+                $oldImagePath = public_path($product->product_image);
+
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
                 }
 
                 $image = $request->file('product_image');
@@ -93,6 +96,7 @@ class ProductController extends Controller
             $product->update($validatedProduct);
 
             return response()->json([
+                'status_code' => 200,
                 'message' => 'Product updated successfully',
                 'product' => $product,
             ], 200);
@@ -103,6 +107,7 @@ class ProductController extends Controller
             ], 500);
         }
     }
+
 
     public function deleteProduct($id)
     {
@@ -118,7 +123,9 @@ class ProductController extends Controller
         $product->delete();
 
         return response()->json([
-            'message' => 'Product deleted successfully'
+            'status_code' => 200,
+            'message' => 'Product deleted successfully',
+            'data' => $product
         ], 200);
     }
 }

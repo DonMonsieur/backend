@@ -47,9 +47,9 @@ const UpdateCategory = ({ selectedCategory, onClose }) => {
             const response = await api.put(`/categories/update/${categoryId}`, {
                 category_name: categoryName,
                 category_description: categoryDescription,
-                product_manager: productManagerId,
+                product_manager_id: productManagerId,
             });
-            if (response.status === 201) {
+            if (response.status === 200) {
                 onClose();
 
                 alert(response.data.message);

@@ -24,7 +24,7 @@ class StoreCategoryRequest extends FormRequest
         return [
             'category_name' => 'required|string|max:30|unique:categories,category_name',
             'category_description' => 'required|string|max:255',
-            'product_manager' => 'required|exists:users,id',
+            'product_manager_id' => 'required|exists:users,id',
         ];
     }
 }

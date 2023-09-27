@@ -20,7 +20,7 @@ class CategoryFactory extends Factory
         return [
             'category_name' => $this->faker->unique()->word(),
             'category_description' => $this->faker->unique()->sentence(),
-            'product_manager' => $userId,
+            'product_manager_id' => $userId,
         ];
     }
 }

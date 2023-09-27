@@ -24,7 +24,7 @@ class UpdateCategoryRequest extends FormRequest
         return [
             'category_name' => 'required|string|max:55|unique:categories,category_name,' . $this->id,
             'category_description' => 'nullable|string|max:255',
-            'product_manager' => 'exists:users,id',
+            'product_manager_id' => 'exists:users,id',
         ];
     }
 }

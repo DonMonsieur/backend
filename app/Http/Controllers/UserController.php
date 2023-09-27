@@ -15,8 +15,9 @@ class UserController extends Controller
             ->get();;
 
         return response()->json([
-            'data' => $userList,
+            'status_code' => 200,
             'message' => 'OK',
+            'data' => $userList
         ], 200);
     }
 
@@ -29,7 +30,9 @@ class UserController extends Controller
             $user = User::create($userData);
 
             return response()->json([
+                'status_code' => 201,
                 'message' => 'User created successfully',
+                'data' => $user
             ], 201);
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while creating the user.'], 500);
@@ -45,7 +48,9 @@ class UserController extends Controller
             $user->update($userData);
 
             return response()->json([
+                'status_code' => 200,
                 'message' => 'User updated successfully',
+                'data' => $user
             ], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while updating the user.'], 500);
@@ -60,7 +65,9 @@ class UserController extends Controller
             $user->delete($user);
 
             return response()->json([
+                'status_code' => 200,
                 'message' => 'User deleted!',
+                'date' => $user
             ], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => 'An error occurred while updating the user.'], 500);

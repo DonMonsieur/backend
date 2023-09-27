@@ -34,7 +34,7 @@ const CreateCategories = ({ onClose }) => {
             const response = await api.post("/categories/create", {
                 category_name: categoryName,
                 category_description: categoryDescription,
-                product_manager: productManagerId,
+                product_manager_id: productManagerId,
             });
 
             if (response.status === 201) {

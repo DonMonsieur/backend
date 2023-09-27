@@ -25,7 +25,7 @@ class ProductFactory extends Factory
             'product_sku' => $this->faker->unique()->randomNumber(),
             'product_category_id' => $categoryId,
             'product_description' => $this->faker->unique()->sentence(),
-            'product_image' => null,
+            'product_image' => $this->faker->imageUrl(),
         ];
     }
 }

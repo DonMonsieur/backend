@@ -27,7 +27,9 @@ class CategoryController extends Controller
         $category = Category::create($validatedCategory);
 
         return response()->json([
+            'status_code' => 200,
             'message' => 'Category created successfully',
+            'data' => $category
         ], 201);
     }
 
@@ -38,8 +40,10 @@ class CategoryController extends Controller
         $category->update($request->validated());
 
         return response()->json([
+            'status_code' => 200,
             'message' => 'Category updated successfully',
-        ], 201);
+            'data' => $category
+        ], 200);
     }
 
 
@@ -50,8 +54,10 @@ class CategoryController extends Controller
         $category->delete();
 
         return response()->json([
-            'message' => 'Category deleted!'
-        ]);
+            'status_code' => 200,
+            'message' => 'Category deleted!',
+            'data' => $category
+        ], 200);
     }
 
     public function getProductCat()
