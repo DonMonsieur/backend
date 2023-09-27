@@ -23,9 +23,9 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'product_image' => 'required|mimes:jpg,png,jpeg|max:20000',
-            'product_name' => 'required|string|max:55|unique:products,product_name',
-            'product_sku' => 'required|string|max:255|unique:products,product_sku',
-            'product_description' => 'nullable|string|max:255',
+            'product_name' => 'required|string|max:30|unique:products,product_name',
+            'product_sku' => 'required|string|max:50|unique:products,product_sku',
+            'product_description' => 'required|string|max:255',
             'product_category_id' => 'required|exists:categories,id',
 
         ];

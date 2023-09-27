@@ -43,6 +43,7 @@ const CreateProduct = ({ onClose }) => {
             const response = await api.post("/products/create", formData);
 
             if (response.status === 201) {
+                console.log(productImage);
                 onClose();
                 alert(response.data.message);
             } else {

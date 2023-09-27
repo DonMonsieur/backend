@@ -1,6 +1,7 @@
 import {
     Avatar,
     Button,
+    CardMedia,
     DialogActions,
     DialogContent,
     Grid,
@@ -30,8 +31,9 @@ const DeleteProduct = ({ selectedProduct, onClose }) => {
             <DialogContent>
                 <Grid container direction={"column"} spacing={3} paddingTop={2}>
                     <Grid item>
-                        <Avatar
-                            src={"http://localhost:8000/" + image}
+                        <CardMedia
+                            component="img"
+                            image={"http://localhost:8000/" + image}
                             sx={{
                                 height: "200px",
                                 width: "200px",

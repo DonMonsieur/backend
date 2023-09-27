@@ -22,8 +22,8 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_name' => 'required|string|max:55|unique:categories,category_name',
-            'category_description' => 'nullable|string|max:255',
+            'category_name' => 'required|string|max:30|unique:categories,category_name',
+            'category_description' => 'required|string|max:255',
             'product_manager' => 'required|exists:users,id',
         ];
     }

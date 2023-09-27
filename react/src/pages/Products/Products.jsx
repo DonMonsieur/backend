@@ -72,9 +72,6 @@ const Products = () => {
                     <CardMedia
                         component="img"
                         src={imageSrc}
-                        onClick={() =>
-                            handleImageClick(cellValues.row.image, "View Image")
-                        }
                         sx={{
                             height: 50,
                             width: 50,

@@ -72,24 +72,47 @@ class ProductController extends Controller
         ], 201);
     }
 
-
-    public function show(Product $product)
+    public function updateProduct(UpdateProductRequest $request, $id)
     {
-        //
-    }
+        try {
+            $product = Product::findOrFail($id);
 
-    public function updateProduct(UpdateProductRequest $request, Product $product)
-    {
-        //
+            $validatedProduct = $request->validated();
+
+            if ($request->hasFile('product_image')) {
+                if (file_exists(public_path($product->product_image))) {
+                    unlink(public_path($product->product_image));
+                }
+
+                $image = $request->file('product_image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $imageName);
+                $validatedProduct['product_image'] = 'images/' . $imageName;
+            }
+
+            $product->update($validatedProduct);
+
+            return response()->json([
+                'message' => 'Product updated successfully',
+                'product' => $product,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error updating product',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     public function deleteProduct($id)
     {
         $product = Product::findOrFail($id);
 
-        $imagePath = public_path($product->product_image);
-        if (file_exists($imagePath)) {
-            unlink($imagePath);
+        if (!is_null($product->product_image)) {
+            $imagePath = public_path($product->product_image);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
         }
 
         $product->delete();

@@ -50,7 +50,6 @@ const Categories = () => {
         setDeleteSelectedCategory(rowData.row);
         setOpenDialogBox(true);
         setDialogType(type);
-        console.log(rowData.row);
     };
 
     const handleClose = () => {

@@ -33,7 +33,7 @@ Route::prefix('/products')->group(function () {
     Route::get('/list', [ProductController::class, 'getProduct']);
     Route::get('/data', [ProductController::class, 'productData']);
     Route::post('/create', [ProductController::class, 'createProduct']);
-    Route::put('/update/{id}', [ProductController::class, 'updateProduct']);
+    Route::post('/update/{id}', [ProductController::class, 'updateProduct']);
     Route::delete('/delete/{id}', [ProductController::class, 'deleteProduct']);
 });
 
