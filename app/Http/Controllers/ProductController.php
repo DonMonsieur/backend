@@ -83,8 +83,19 @@ class ProductController extends Controller
         //
     }
 
-    public function deleteProduct(Product $product)
+    public function deleteProduct($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        $imagePath = public_path($product->product_image);
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
+        $product->delete();
+
+        return response()->json([
+            'message' => 'Product deleted successfully'
+        ], 200);
     }
 }

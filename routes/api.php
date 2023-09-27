@@ -34,7 +34,7 @@ Route::prefix('/products')->group(function () {
     Route::get('/data', [ProductController::class, 'productData']);
     Route::post('/create', [ProductController::class, 'createProduct']);
     Route::put('/update/{id}', [ProductController::class, 'updateProduct']);
-    Route::delete('/delete', [ProductController::class, 'deleteProduct']);
+    Route::delete('/delete/{id}', [ProductController::class, 'deleteProduct']);
 });
 
 Route::prefix('/categories')->group(function () {

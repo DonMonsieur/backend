@@ -9,7 +9,7 @@ import {
 import React, { Fragment, useEffect, useState } from "react";
 import api from "../../config/api";
 
-const DeleteCategory = ({ selectedCategory, onClose, snackBarData }) => {
+const DeleteCategory = ({ selectedCategory, onClose }) => {
     const categoryId = selectedCategory.id;
     const categoryName = selectedCategory.category_name;
     const categoryDescription = selectedCategory.category_description;
