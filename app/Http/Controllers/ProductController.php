@@ -40,10 +40,38 @@ class ProductController extends Controller
         ], 200);
     }
 
+    public function productData()
+    {
+        $data = Product::getProduct();
+
+        return response()->json([
+            'status_code' => 200,
+            'message' => 'OK',
+            'data' => $data,
+        ], 200);
+    }
+
+
     public function createProduct(StoreProductRequest $request)
     {
-        //
+
+        $validatedProduct = $request->validated();
+
+        $image = $request->file('product_image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
+
+        $validatedProduct['product_image'] = 'images/' . $imageName;
+
+
+        $product = Product::create($validatedProduct);
+
+        return response()->json([
+            'message' => 'Product created successfully',
+            'product' => $product,
+        ], 201);
     }
+
 
     public function show(Product $product)
     {

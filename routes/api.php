@@ -31,6 +31,7 @@ Route::prefix('/users')->group(function () {
 
 Route::prefix('/products')->group(function () {
     Route::get('/list', [ProductController::class, 'getProduct']);
+    Route::get('/data', [ProductController::class, 'productData']);
     Route::post('/create', [ProductController::class, 'createProduct']);
     Route::put('/update/{id}', [ProductController::class, 'updateProduct']);
     Route::delete('/delete', [ProductController::class, 'deleteProduct']);
@@ -41,4 +42,5 @@ Route::prefix('/categories')->group(function () {
     Route::post('/create', [CategoryController::class, 'createCategories']);
     Route::put('/update/{id}', [CategoryController::class, 'updateCategories']);
     Route::delete('/delete/{id}', [CategoryController::class, 'deleteCategories']);
+    Route::get('/product-category', [CategoryController::class, 'getProductCat']);
 });

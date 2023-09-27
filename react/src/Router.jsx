@@ -5,7 +5,7 @@ import NotFound from "./pages/NotFound";
 import DefaultLayout from "./components/DefaultLayout";
 import Dashboard from "./pages/Dashboard";
 import Categories from "./pages/Categories/Categories";
-import Products from "./pages/Products";
+import Products from "./pages/Products/Products";
 
 const router = createBrowserRouter([
     {

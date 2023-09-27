@@ -53,4 +53,15 @@ class CategoryController extends Controller
             'message' => 'Category deleted!'
         ]);
     }
+
+    public function getProductCat()
+    {
+        $data = Category::getProductCategory();
+
+        return response()->json([
+            'status_code' => 200,
+            'message' => 'OK',
+            'data' => $data
+        ]);
+    }
 }

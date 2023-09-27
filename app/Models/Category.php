@@ -19,4 +19,9 @@ class Category extends Model
             ->orderBy('categories.category_name', 'asc')
             ->get();
     }
+
+    public static function getProductCategory()
+    {
+        return self::select('id', 'category_name')->get();
+    }
 }

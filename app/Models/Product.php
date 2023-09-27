@@ -23,6 +23,7 @@ class Product extends Model
             'products.product_sku',
             'products.product_category_id',
             'products.product_description',
+            'products.product_image',
             'categories.category_name',
         ])
             ->leftJoin('categories', 'products.product_category_id', '=', 'categories.id')
@@ -33,5 +34,21 @@ class Product extends Model
         }
 
         return $query->paginate($perPage, ['*'], 'page', $page);
+    }
+
+    public static function getProduct()
+    {
+        return self::select([
+            'products.id as id',
+            'products.product_name',
+            'products.product_sku',
+            'products.product_description',
+            'products.product_image',
+            'categories.category_name as product_category',
+        ])
+            ->leftJoin('categories', 'products.product_category_id', '=', 'categories.id')
+            ->orderBy('products.created_at', 'desc')
+            ->orderBy('products.updated_at', 'desc')
+            ->get();
     }
 }
