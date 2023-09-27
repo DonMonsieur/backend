@@ -16,6 +16,7 @@ class Category extends Model
     {
         return self::select('categories.id', 'categories.category_name', 'categories.category_description', 'users.username as product_manager')
             ->leftJoin('users', 'categories.product_manager', '=', 'users.id')
+            ->orderBy('categories.category_name', 'asc')
             ->get();
     }
 }
