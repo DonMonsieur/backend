@@ -21,13 +21,18 @@ class UpdateProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'product_image' => 'required|mimes:jpg,png,jpeg|max:20000',
-            'product_name' => 'required|string|max:55|unique:products,product_name,' . $this->id,
-            'product_sku' => 'required|string|max:255|unique:products,product_sku,' . $this->id,
-            'product_description' => 'nullable|string|max:255',
-            'product_category_id' => 'exists:categories,id',
+        return
+            $rules = [
+                'product_name' => 'required|string|max:55|unique:products,product_name,' . $this->id,
+                'product_sku' => 'required|string|max:255|unique:products,product_sku,' . $this->id,
+                'product_description' => 'nullable|string|max:255',
+                'product_category_id' => 'exists:categories,id',
+            ];
 
-        ];
+        if ($this->hasFile('product_image')) {
+            $rules['product_image'] = 'required|mimes:jpg,png,jpeg|max:20000';
+        }
+
+        return $rules;
     }
 }
